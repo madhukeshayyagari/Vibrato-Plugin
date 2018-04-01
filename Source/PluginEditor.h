@@ -32,10 +32,11 @@ public:
     void paint (Graphics&) override;
     void resized() override;
     void buttonClicked (Button* button) override;
+	void sliderValueChanged(Slider* slider) override;
+	void initializeSlider(Slider &slider, float Min, float Max, float Interval, float x, float y, float width, float height, const String &displayText, float default);
+	void initializeButton(ToggleButton &button, float x, float y, float width, float height);
+
     
-    Slider m_sliderModWidth;
-    Slider m_sliderModFreq;
-	ToggleButton m_toggleButton;
     
     
     
@@ -45,7 +46,9 @@ private:
     // access the processor object that created it.
     VibratoPluginAudioProcessor& processor;
     
-    
+	Slider m_sliderModWidth;
+	Slider m_sliderModFreq;
+	ToggleButton m_toggleButton;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (VibratoPluginAudioProcessorEditor)
 };
