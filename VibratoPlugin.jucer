@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT name="VibratoPlugin" projectType="audioplug" buildStandalone="1"
+              jucerVersion="5.2.1">
+  <MAINGROUP id="YNecXA" name="VibratoPlugin">
+    <GROUP id="{C7068221-1BBA-D871-4807-BE9D06A1C5E3}" name="Source">
+      <FILE id="m5w7j5" name="Lfo.h" compile="0" resource="0" file="Source/Lfo.h"/>
+      <FILE id="KlJioT" name="RingBuffer.h" compile="0" resource="0" file="Source/RingBuffer.h"/>
+      <FILE id="MvIF2f" name="Synthesis.h" compile="0" resource="0" file="Source/Synthesis.h"/>
+      <FILE id="rk7SkL" name="Util.h" compile="0" resource="0" file="Source/Util.h"/>
+      <FILE id="FegNQm" name="Vibrato.cpp" compile="1" resource="0" file="Source/Vibrato.cpp"/>
+      <FILE id="yY744l" name="Vibrato.h" compile="0" resource="0" file="Source/Vibrato.h"/>
+      <FILE id="phDA39" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="sfmX1F" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="BL4N0w" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="HC51HK" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      <FILE id="qqLHSD" name="ErrorDef.h" compile="0" resource="0" file="../Vibrato/2018-MUSI6106/inc/ErrorDef.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <VS2017 targetFolder="Builds/VisualStudio2017">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../Juce/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../Juce/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../Juce/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../Juce/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../Juce/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../Juce/JUCE/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../Juce/JUCE/modules"/>
+        <MODULEPATH id="juce_video" path="../Juce/JUCE/modules"/>
+        <MODULEPATH id="juce_opengl" path="../Juce/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../Juce/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../Juce/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../Juce/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../Juce/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../Juce/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../Juce/JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2017>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="0"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_video" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+  </MODULES>
+  <JUCEOPTIONS/>
+</JUCERPROJECT>
