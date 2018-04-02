@@ -12,6 +12,13 @@
 #include "PluginEditor.h"
 
 
+#define MIN_MOD_AMP 0.0
+#define MAX_MOD_AMP 0.1
+#define DEFAULT_MOD_AMP 0.01
+#define MIN_MOD_FREQ 0.0
+#define MAX_MOD_FREQ 20.0
+#define DEFAULT_MOD_FREQ 2.0
+
 //==============================================================================
 VibratoPluginAudioProcessor::VibratoPluginAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -98,6 +105,12 @@ void VibratoPluginAudioProcessor::prepareToPlay (double sampleRate, int samplesP
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+    
+    //auto totalNumInputChannels  = getTotalNumInputChannels();
+    //auto totalNumOutputChannels = getTotalNumOutputChannels();
+    setParameter(0, getParameterDefaultValue(0));
+    setParameter(1, getParameterDefaultValue(1));
+    
 }
 
 void VibratoPluginAudioProcessor::releaseResources()
@@ -184,6 +197,43 @@ void VibratoPluginAudioProcessor::setStateInformation (const void* data, int siz
     // whose contents will have been created by the getStateInformation() call.
 }
 
+void VibratoPluginAudioProcessor::setParameter(int iParamIdx, float fNewValue)
+{
+    if (iParamIdx == 0)
+    {
+        fModFreq = fNewValue * (MAX_MOD_FREQ - MIN_MOD_FREQ) + MIN_MOD_FREQ;
+        pCVibrato->setParam(CVibrato::VibratoParam_t::kParamModFreqInHz, fModFreq);
+        
+    }
+    else if (iParamIdx == 1)
+    {
+        fModAmp = fNewValue * (MAX_MOD_AMP - MIN_MOD_AMP) + MIN_MOD_AMP;
+        pCVibrato->setParam(CVibrato::VibratoParam_t::kParamModWidthInS, fModAmp);
+    }
+    else
+    {
+        std::cout<< "invalid index!"<<std::endl;
+    }
+    
+}
+
+float VibratoPluginAudioProcessor::getParameter(int iParamIdx)
+{
+    if (iParamIdx == 0)
+    {
+        return pCVibrato->getParam(CVibrato::VibratoParam_t::kParamModFreqInHz);
+    }
+    else if (iParamIdx == 1)
+    {
+        return pCVibrato->getParam(CVibrato::VibratoParam_t::kParamModWidthInS);
+    }
+    else
+    {
+        std::cout<< "invalid index, returning Mod Freq!"<<std::endl;
+        return pCVibrato->getParam(CVibrato::VibratoParam_t::kParamModFreqInHz);
+    }
+    
+}
 //==============================================================================
 // This creates new instances of the plugin..
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()

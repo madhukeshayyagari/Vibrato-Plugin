@@ -55,12 +55,12 @@ void VibratoPluginAudioProcessorEditor::sliderValueChanged(Slider * slider)
 {
 }
 
-void VibratoPluginAudioProcessorEditor::initializeSlider(Slider & slider, float Min, float Max, float Interval, float x, float y, float width, float height, const String & displayText, float default)
+void VibratoPluginAudioProcessorEditor::initializeSlider(Slider & slider, float Min, float Max, float Interval, float x, float y, float width, float height, const String & displayText, float fdefault)
 {
 	slider.setSliderStyle(Slider::LinearBarVertical);
 	slider.setRange(Min, Max, Interval);
 	slider.setTextValueSuffix(displayText);
-	slider.setValue(default);
+	slider.setValue(fdefault);
 	slider.setBounds(x,y,width,height);
 	slider.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
 	slider.addListener(this);

@@ -4,7 +4,7 @@
 // project headers
 
 
-#include "c:\Users\Madhukesh Ayyagari\Desktop\Class Work Spring 2018\Audio Software Engineering\Vibrato\2018-MUSI6106\inc\ErrorDef.h"
+#include "ErrorDef.h"
 
 #include "RingBuffer.h"
 

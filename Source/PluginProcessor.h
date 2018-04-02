@@ -11,6 +11,8 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "Vibrato.h"
+#include "ErrorDef.h"
 
 
 //==============================================================================
@@ -56,7 +58,16 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    //==============================================================================
+    void setParameter (int iParamIdx, float fNewValue) override;
+    float getParameter(int iParamIdx) override;
+    
 private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (VibratoPluginAudioProcessor)
+    
+    CVibrato *pCVibrato;
+    float fModFreq;
+    float fModAmp;
+    
 };
