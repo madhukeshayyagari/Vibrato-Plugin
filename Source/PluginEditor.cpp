@@ -53,6 +53,14 @@ void VibratoPluginAudioProcessorEditor::buttonClicked(Button* button)
 
 void VibratoPluginAudioProcessorEditor::sliderValueChanged(Slider * slider)
 {
+    if (slider == &m_sliderModFreq)
+    {
+        processor.fModFreq = m_sliderModFreq.getValue();
+    }
+    else if (slider == &m_sliderModWidth)
+    {
+        processor.fModWidth = m_sliderModWidth.getValue();
+    }
 }
 
 void VibratoPluginAudioProcessorEditor::initializeSlider(Slider & slider, float Min, float Max, float Interval, float x, float y, float width, float height, const String & displayText, float fdefault)
@@ -76,3 +84,4 @@ void VibratoPluginAudioProcessorEditor::initializeButton(ToggleButton &button, f
 	addAndMakeVisible(&button);
 
 }
+

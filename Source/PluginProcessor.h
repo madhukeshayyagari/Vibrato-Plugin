@@ -34,7 +34,8 @@ public:
    #endif
 
     void processBlock (AudioBuffer<float>&, MidiBuffer&) override;
-
+    void processBlockBypassed (AudioBuffer<float>& buffer, MidiBuffer& midiMessages) override;
+    
     //==============================================================================
     AudioProcessorEditor* createEditor() override;
     bool hasEditor() const override;
@@ -62,12 +63,16 @@ public:
     void setParameter (int iParamIdx, float fNewValue) override;
     float getParameter(int iParamIdx) override;
     
+    float fModFreq;
+    float fModWidth;
+    
 private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (VibratoPluginAudioProcessor)
     
     CVibrato *pCVibrato;
-    float fModFreq;
-    float fModAmp;
+    
+    const float fMaxModWidth = 0.1;
+    bool bByPass;
     
 };

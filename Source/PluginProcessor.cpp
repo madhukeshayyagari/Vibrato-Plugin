@@ -12,13 +12,6 @@
 #include "PluginEditor.h"
 
 
-#define MIN_MOD_AMP 0.0
-#define MAX_MOD_AMP 0.1
-#define DEFAULT_MOD_AMP 0.01
-#define MIN_MOD_FREQ 0.0
-#define MAX_MOD_FREQ 20.0
-#define DEFAULT_MOD_FREQ 2.0
-
 //==============================================================================
 VibratoPluginAudioProcessor::VibratoPluginAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -106,8 +99,10 @@ void VibratoPluginAudioProcessor::prepareToPlay (double sampleRate, int samplesP
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
     
-    //auto totalNumInputChannels  = getTotalNumInputChannels();
+    auto totalNumInputChannels  = getTotalNumInputChannels();
     //auto totalNumOutputChannels = getTotalNumOutputChannels();
+    CVibrato::createInstance(pCVibrato);
+    pCVibrato->initInstance(fMaxModWidth, sampleRate,  totalNumInputChannels);
     setParameter(0, getParameterDefaultValue(0));
     setParameter(1, getParameterDefaultValue(1));
     
@@ -157,21 +152,40 @@ void VibratoPluginAudioProcessor::processBlock (AudioBuffer<float>& buffer, Midi
     // this code if your algorithm always overwrites all the output channels.
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
-
+    
+    
+    pCVibrato->setParam(CVibrato::VibratoParam_t::kParamModFreqInHz, fModFreq);
+    std::cout<< fModFreq <<std::endl;
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
     // Make sure to reset the state if your inner loop is processing
     // the samples and the outer loop is handling the channels.
     // Alternatively, you can process the samples with the channels
     // interleaved by keeping the same state.
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        auto* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
-    }
+//    for (int channel = 0; channel < totalNumInputChannels; ++channel)
+//    {
+//
+//        //pCVibrato->process( (float**)buffer.getArrayOfReadPointers(), buffer.getArrayOfWritePointers(), this->getSampleRate());
+//        // ..do something to the data...
+//        buffer.getWritePointer (channel);
+//    }
 }
 
+void VibratoPluginAudioProcessor::processBlockBypassed (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
+{
+    for (int i = getTotalNumInputChannels(); i < getTotalNumOutputChannels(); ++i)
+        buffer.clear (i, 0, buffer.getNumSamples());
+    
+    //float **channelData = buffer.getArrayOfWritePointers();
+    
+    // This is the place where you'd normally do the guts of your plugin's
+    // audio processing...
+    for (int channel = 0; channel < getTotalNumInputChannels(); ++channel)
+    {
+        buffer.getWritePointer (channel);
+        
+    }
+}
 //==============================================================================
 bool VibratoPluginAudioProcessor::hasEditor() const
 {
@@ -201,14 +215,15 @@ void VibratoPluginAudioProcessor::setParameter(int iParamIdx, float fNewValue)
 {
     if (iParamIdx == 0)
     {
-        fModFreq = fNewValue * (MAX_MOD_FREQ - MIN_MOD_FREQ) + MIN_MOD_FREQ;
+        fModFreq = fNewValue;
+        std::cout<< fModFreq <<std::endl;
         pCVibrato->setParam(CVibrato::VibratoParam_t::kParamModFreqInHz, fModFreq);
         
     }
     else if (iParamIdx == 1)
     {
-        fModAmp = fNewValue * (MAX_MOD_AMP - MIN_MOD_AMP) + MIN_MOD_AMP;
-        pCVibrato->setParam(CVibrato::VibratoParam_t::kParamModWidthInS, fModAmp);
+        fModWidth = fNewValue;
+        pCVibrato->setParam(CVibrato::VibratoParam_t::kParamModWidthInS, fModWidth);
     }
     else
     {
@@ -232,7 +247,6 @@ float VibratoPluginAudioProcessor::getParameter(int iParamIdx)
         std::cout<< "invalid index, returning Mod Freq!"<<std::endl;
         return pCVibrato->getParam(CVibrato::VibratoParam_t::kParamModFreqInHz);
     }
-    
 }
 //==============================================================================
 // This creates new instances of the plugin..
