@@ -96,7 +96,7 @@ void VibratoPluginAudioProcessor::prepareToPlay(double sampleRate, int samplesPe
 	// Use this method as the place to do any pre-playback
 	// initialisation that you need..
 
-	auto totalNumInputChannels = getTotalNumInputChannels();
+	   auto totalNumInputChannels = getTotalNumInputChannels();
 	auto totalNumOutputChannels = getTotalNumOutputChannels();
 	CVibrato::createInstance(pCVibrato);
 	pCVibrato->initInstance(fMaxModWidth, sampleRate, totalNumInputChannels);
