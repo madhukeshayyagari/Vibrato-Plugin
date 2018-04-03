@@ -17,7 +17,8 @@
 
 
 
-;/**
+//==============================================================================
+/**
 */
 class VibratoPluginAudioProcessorEditor  : public AudioProcessorEditor,
 public Button::Listener,

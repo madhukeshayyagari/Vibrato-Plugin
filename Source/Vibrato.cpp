@@ -10,6 +10,7 @@
 
 #include "Lfo.h"
 #include "Vibrato.h"
+#include "../JuceLibraryCode/JuceHeader.h"
 
 static const char*  kCVibratoBuildDate             = __DATE__;
 
@@ -164,8 +165,8 @@ Error_t CVibrato::process( float **ppfInputBuffer, float **ppfOutputBuffer, int 
         float fOffset = m_pCLfo->getNext();
         for (int c = 0; c < m_iNumChannels; c++)
         {
+            
             m_ppCRingBuff[c]->putPostInc(ppfInputBuffer[c][i]);
-
             ppfOutputBuffer[c][i]   = m_ppCRingBuff[c]->get(fOffset);
             m_ppCRingBuff[c]->getPostInc(); // dummy call to keep write and read idx in sync
         }

@@ -29,7 +29,7 @@ public:
 
         kNumVibratoParams
     };
-    //static const int getVersion (const Version_t eVersionIdx);
+    static const int getVersion (const Version_t eVersionIdx);
     static const char* getBuildDate ();
 
     static Error_t createInstance (CVibrato*& pCVibrato);
