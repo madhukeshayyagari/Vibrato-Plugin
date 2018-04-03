@@ -33,21 +33,12 @@ public:
 	void processBlock(AudioBuffer<float>&, MidiBuffer&) override;
 	void processBlockBypassed(AudioBuffer<float>& buffer, MidiBuffer& midiMessages) override;
 
-<<<<<<< HEAD
 	//==============================================================================
 	AudioProcessorEditor* createEditor() override;
 	bool hasEditor() const override;
 
 	//==============================================================================
 	const String getName() const override;
-=======
-    void processBlock (AudioBuffer<float>&, MidiBuffer&) override;
-    void processBlockBypassed (AudioBuffer<float>& buffer, MidiBuffer& midiMessages) override;
-    
-    //==============================================================================
-    AudioProcessorEditor* createEditor() override;
-    bool hasEditor() const override;
->>>>>>> 9fce03c7ec7c3162f2b18bf58dcf51e835f3564e
 
 	bool acceptsMidi() const override;
 	bool producesMidi() const override;
@@ -73,32 +64,13 @@ public:
 	float fModWidth;
 	CVibrato *pCVibrato;
 
-    //==============================================================================
-    void setParameter (int iParamIdx, float fNewValue) override;
-    float getParameter(int iParamIdx) override;
-    
-    float fModFreq;
-    float fModWidth;
-    
 private:
-<<<<<<< HEAD
 	//==============================================================================
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(VibratoPluginAudioProcessor)
 
-		
 
-	const float fMaxModWidth = 0.1;
+
+		const float fMaxModWidth = 0.1;
 	bool bByPass;
 
 };
-=======
-    //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (VibratoPluginAudioProcessor)
-    
-    CVibrato *pCVibrato;
-    
-    const float fMaxModWidth = 0.1;
-    bool bByPass;
-    
-};
->>>>>>> 9fce03c7ec7c3162f2b18bf58dcf51e835f3564e

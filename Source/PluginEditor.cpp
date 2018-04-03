@@ -7,8 +7,6 @@ It contains the basic framework code for a JUCE plugin editor.
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
-#include<iostream>
-#include<stdio.h>
 
 
 //==============================================================================
@@ -20,8 +18,7 @@ VibratoPluginAudioProcessorEditor::VibratoPluginAudioProcessorEditor(VibratoPlug
 	setSize(300, 300);
 	initializeSlider(m_sliderModFreq, 0.0f, 127.0f, 1.0f, 40, 30, 20, 165, "ModFreq", 50.0f);
 	initializeSlider(m_sliderModWidth, 0.0f, 1.0f, 0.01f, 100, 30, 20, 165, "ModWidth", 0.5f);
-	initializeButton(m_toggleButton, 220, 5, 80, 40);
-	
+	initializeButton(m_toggleButton, 150, 30, 80, 40);
 }
 
 VibratoPluginAudioProcessorEditor::~VibratoPluginAudioProcessorEditor()
@@ -53,29 +50,20 @@ void VibratoPluginAudioProcessorEditor::buttonClicked(Button* button)
 
 void VibratoPluginAudioProcessorEditor::sliderValueChanged(Slider * slider)
 {
-<<<<<<< HEAD
 	if (slider == &m_sliderModFreq)
 	{
-		std::cout << m_sliderModFreq.getValue()<<std::endl;
+		std::cout << m_sliderModFreq.getValue() << std::endl;
 		processor.fModFreq = m_sliderModFreq.getValue();
-		processor.setParameter(0, m_sliderModFreq.getValue());
-		//processor.pCVibrato->setParam(CVibrato::kParamModFreqInHz, m_sliderModFreq.getValue());
+		//processor.setParameter(0, m_sliderModFreq.getValue());
+		processor.pCVibrato->setParam(CVibrato::kParamModFreqInHz, m_sliderModFreq.getValue());
+
 	}
 	else if (slider == &m_sliderModWidth)
 	{
 		processor.fModWidth = m_sliderModWidth.getValue();
-		processor.setParameter(2, m_sliderModWidth.getValue());
+		//processor.setParameter(1, m_sliderModWidth.getValue());
+		processor.pCVibrato->setParam(CVibrato::VibratoParam_t::kParamModWidthInS, m_sliderModWidth.getValue());
 	}
-=======
-    if (slider == &m_sliderModFreq)
-    {
-        processor.fModFreq = m_sliderModFreq.getValue();
-    }
-    else if (slider == &m_sliderModWidth)
-    {
-        processor.fModWidth = m_sliderModWidth.getValue();
-    }
->>>>>>> 9fce03c7ec7c3162f2b18bf58dcf51e835f3564e
 }
 
 void VibratoPluginAudioProcessorEditor::initializeSlider(Slider & slider, float Min, float Max, float Interval, float x, float y, float width, float height, const String & displayText, float fdefault)
@@ -84,11 +72,7 @@ void VibratoPluginAudioProcessorEditor::initializeSlider(Slider & slider, float 
 	slider.setRange(Min, Max, Interval);
 	slider.setTextValueSuffix(displayText);
 	slider.setValue(fdefault);
-<<<<<<< HEAD
 	slider.setBounds(x, y, width, height);
-=======
-	slider.setBounds(x,y,width,height);
->>>>>>> 9fce03c7ec7c3162f2b18bf58dcf51e835f3564e
 	slider.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
 	slider.addListener(this);
 	addAndMakeVisible(&slider);
@@ -103,4 +87,3 @@ void VibratoPluginAudioProcessorEditor::initializeButton(ToggleButton &button, f
 	addAndMakeVisible(&button);
 
 }
-
