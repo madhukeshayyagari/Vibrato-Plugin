@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT name="VibratoPlugin" projectType="audioplug" buildStandalone="1"
-              jucerVersion="5.2.1">
+<JUCERPROJECT name="VibratoPlugin" projectType="audioplug" jucerVersion="5.2.1"
+              buildVST3="1" buildStandalone="1">
   <MAINGROUP id="YNecXA" name="VibratoPlugin">
     <GROUP id="{C7068221-1BBA-D871-4807-BE9D06A1C5E3}" name="Source">
       <FILE id="m5w7j5" name="Lfo.h" compile="0" resource="0" file="Source/Lfo.h"/>
