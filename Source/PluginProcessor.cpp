@@ -98,6 +98,7 @@ void VibratoPluginAudioProcessor::changeProgramName(int index, const String& new
 //==============================================================================
 void VibratoPluginAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
+<<<<<<< HEAD
 	// Use this method as the place to do any pre-playback
 	// initialisation that you need..
 
@@ -108,6 +109,18 @@ void VibratoPluginAudioProcessor::prepareToPlay(double sampleRate, int samplesPe
 	setParameter(0, getParameterDefaultValue(0));
 	setParameter(1, getParameterDefaultValue(1));
 
+=======
+    // Use this method as the place to do any pre-playback
+    // initialisation that you need..
+    
+    auto totalNumInputChannels  = getTotalNumInputChannels();
+    //auto totalNumOutputChannels = getTotalNumOutputChannels();
+    CVibrato::createInstance(pCVibrato);
+    pCVibrato->initInstance(fMaxModWidth, sampleRate,  totalNumInputChannels);
+    setParameter(0, getParameterDefaultValue(0));
+    setParameter(1, getParameterDefaultValue(1));
+    
+>>>>>>> 9fce03c7ec7c3162f2b18bf58dcf51e835f3564e
 }
 
 void VibratoPluginAudioProcessor::releaseResources()
@@ -146,6 +159,7 @@ void VibratoPluginAudioProcessor::processBlock(AudioBuffer<float>& buffer, MidiB
 	auto totalNumInputChannels = getTotalNumInputChannels();
 	auto totalNumOutputChannels = getTotalNumOutputChannels();
 
+<<<<<<< HEAD
 	// In case we have more outputs than inputs, this code clears any output
 	// channels that didn't contain input data, (because these aren't
 	// guaranteed to be empty - they may contain garbage).
@@ -185,6 +199,50 @@ void VibratoPluginAudioProcessor::processBlockBypassed(AudioBuffer<float>& buffe
 
 	}
 }
+=======
+    // In case we have more outputs than inputs, this code clears any output
+    // channels that didn't contain input data, (because these aren't
+    // guaranteed to be empty - they may contain garbage).
+    // This is here to avoid people getting screaming feedback
+    // when they first compile a plugin, but obviously you don't need to keep
+    // this code if your algorithm always overwrites all the output channels.
+    for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
+        buffer.clear (i, 0, buffer.getNumSamples());
+    
+    
+    pCVibrato->setParam(CVibrato::VibratoParam_t::kParamModFreqInHz, fModFreq);
+    std::cout<< fModFreq <<std::endl;
+    // This is the place where you'd normally do the guts of your plugin's
+    // audio processing...
+    // Make sure to reset the state if your inner loop is processing
+    // the samples and the outer loop is handling the channels.
+    // Alternatively, you can process the samples with the channels
+    // interleaved by keeping the same state.
+//    for (int channel = 0; channel < totalNumInputChannels; ++channel)
+//    {
+//
+//        //pCVibrato->process( (float**)buffer.getArrayOfReadPointers(), buffer.getArrayOfWritePointers(), this->getSampleRate());
+//        // ..do something to the data...
+//        buffer.getWritePointer (channel);
+//    }
+}
+
+void VibratoPluginAudioProcessor::processBlockBypassed (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
+{
+    for (int i = getTotalNumInputChannels(); i < getTotalNumOutputChannels(); ++i)
+        buffer.clear (i, 0, buffer.getNumSamples());
+    
+    //float **channelData = buffer.getArrayOfWritePointers();
+    
+    // This is the place where you'd normally do the guts of your plugin's
+    // audio processing...
+    for (int channel = 0; channel < getTotalNumInputChannels(); ++channel)
+    {
+        buffer.getWritePointer (channel);
+        
+    }
+}
+>>>>>>> 9fce03c7ec7c3162f2b18bf58dcf51e835f3564e
 //==============================================================================
 bool VibratoPluginAudioProcessor::hasEditor() const
 {
@@ -212,6 +270,7 @@ void VibratoPluginAudioProcessor::setStateInformation(const void* data, int size
 
 void VibratoPluginAudioProcessor::setParameter(int iParamIdx, float fNewValue)
 {
+<<<<<<< HEAD
 	if (iParamIdx == 0)
 	{
 		fModFreq = fNewValue;
@@ -229,10 +288,30 @@ void VibratoPluginAudioProcessor::setParameter(int iParamIdx, float fNewValue)
 		std::cout << "invalid index!" << std::endl;
 	}
 
+=======
+    if (iParamIdx == 0)
+    {
+        fModFreq = fNewValue;
+        std::cout<< fModFreq <<std::endl;
+        pCVibrato->setParam(CVibrato::VibratoParam_t::kParamModFreqInHz, fModFreq);
+        
+    }
+    else if (iParamIdx == 1)
+    {
+        fModWidth = fNewValue;
+        pCVibrato->setParam(CVibrato::VibratoParam_t::kParamModWidthInS, fModWidth);
+    }
+    else
+    {
+        std::cout<< "invalid index!"<<std::endl;
+    }
+    
+>>>>>>> 9fce03c7ec7c3162f2b18bf58dcf51e835f3564e
 }
 
 float VibratoPluginAudioProcessor::getParameter(int iParamIdx)
 {
+<<<<<<< HEAD
 	if (iParamIdx == 0)
 	{
 		return pCVibrato->getParam(CVibrato::VibratoParam_t::kParamModFreqInHz);
@@ -246,6 +325,21 @@ float VibratoPluginAudioProcessor::getParameter(int iParamIdx)
 		std::cout << "invalid index, returning Mod Freq!" << std::endl;
 		return pCVibrato->getParam(CVibrato::VibratoParam_t::kParamModFreqInHz);
 	}
+=======
+    if (iParamIdx == 0)
+    {
+        return pCVibrato->getParam(CVibrato::VibratoParam_t::kParamModFreqInHz);
+    }
+    else if (iParamIdx == 1)
+    {
+        return pCVibrato->getParam(CVibrato::VibratoParam_t::kParamModWidthInS);
+    }
+    else
+    {
+        std::cout<< "invalid index, returning Mod Freq!"<<std::endl;
+        return pCVibrato->getParam(CVibrato::VibratoParam_t::kParamModFreqInHz);
+    }
+>>>>>>> 9fce03c7ec7c3162f2b18bf58dcf51e835f3564e
 }
 //==============================================================================
 // This creates new instances of the plugin..

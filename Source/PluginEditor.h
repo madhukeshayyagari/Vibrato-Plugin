@@ -32,7 +32,7 @@ public:
     void resized() override;
     void buttonClicked (Button* button) override;
 	void sliderValueChanged(Slider* slider) override;
-	void initializeSlider(Slider &slider, float Min, float Max, float Interval, float x, float y, float width, float height, const String &displayText, float default);
+	void initializeSlider(Slider &slider, float Min, float Max, float Interval, float x, float y, float width, float height, const String &displayText, float fdefault);
 	void initializeButton(ToggleButton &button, float x, float y, float width, float height);
 
     
