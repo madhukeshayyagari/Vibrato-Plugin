@@ -26,6 +26,7 @@ VibratoPluginAudioProcessor::VibratoPluginAudioProcessor()
 
 VibratoPluginAudioProcessor::~VibratoPluginAudioProcessor()
 {
+	CVibrato::destroyInstance(pCVibrato);
 }
 
 //==============================================================================
@@ -109,7 +110,7 @@ void VibratoPluginAudioProcessor::releaseResources()
 {
 	// When playback stops, you can use this as an opportunity to free up any
 	// spare memory, etc.
-	CVibrato::destroyInstance(pCVibrato);
+	
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
