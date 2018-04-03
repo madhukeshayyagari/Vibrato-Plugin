@@ -54,15 +54,15 @@ void VibratoPluginAudioProcessorEditor::sliderValueChanged(Slider * slider)
 	{
 		std::cout << m_sliderModFreq.getValue() << std::endl;
 		processor.fModFreq = m_sliderModFreq.getValue();
-		//processor.setParameter(0, m_sliderModFreq.getValue());
-		processor.pCVibrato->setParam(CVibrato::kParamModFreqInHz, m_sliderModFreq.getValue());
+		processor.setParameter(0, m_sliderModFreq.getValue());
+		
 
 	}
 	else if (slider == &m_sliderModWidth)
 	{
 		processor.fModWidth = m_sliderModWidth.getValue();
-		//processor.setParameter(1, m_sliderModWidth.getValue());
-		processor.pCVibrato->setParam(CVibrato::VibratoParam_t::kParamModWidthInS, m_sliderModWidth.getValue());
+		processor.setParameter(1, m_sliderModWidth.getValue());
+		
 	}
 }
 

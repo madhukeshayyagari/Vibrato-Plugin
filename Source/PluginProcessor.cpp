@@ -100,10 +100,8 @@ void VibratoPluginAudioProcessor::prepareToPlay(double sampleRate, int samplesPe
 	auto totalNumOutputChannels = getTotalNumOutputChannels();
 	CVibrato::createInstance(pCVibrato);
 	pCVibrato->initInstance(fMaxModWidth, sampleRate, totalNumInputChannels);
-	pCVibrato->setParam(CVibrato::VibratoParam_t::kParamModFreqInHz, 5);
-	pCVibrato->setParam(CVibrato::VibratoParam_t::kParamModWidthInS, 0.01);
-	//setParameter(0, getParameterDefaultValue(0));
-	//setParameter(1, getParameterDefaultValue(1));
+	setParameter(0, 5);
+	setParameter(1, 0.01);
 
 }
 
