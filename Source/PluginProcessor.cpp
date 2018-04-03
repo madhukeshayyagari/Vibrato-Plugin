@@ -100,7 +100,7 @@ void VibratoPluginAudioProcessor::prepareToPlay(double sampleRate, int samplesPe
 	auto totalNumOutputChannels = getTotalNumOutputChannels();
 	CVibrato::createInstance(pCVibrato);
 	pCVibrato->initInstance(fMaxModWidth, sampleRate, totalNumInputChannels);
-	 setParameter(0, 5);
+	setParameter(0, 5);
 	setParameter(1, 0.01);
 
 }
@@ -109,6 +109,7 @@ void VibratoPluginAudioProcessor::releaseResources()
 {
 	// When playback stops, you can use this as an opportunity to free up any
 	// spare memory, etc.
+	CVibrato::destroyInstance(pCVibrato);
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -153,22 +154,19 @@ void VibratoPluginAudioProcessor::processBlock(AudioBuffer<float>& buffer, MidiB
 	//
 	//    pCVibrato->setParam(CVibrato::VibratoParam_t::kParamModFreqInHz, fModFreq);
 	//    pCVibrato->setParam(CVibrato::VibratoParam_t::kParamModWidthInS, fModWidth);
-	DBG(fModFreq); DBG("Hi");
-	pCVibrato->process((float**)buffer.getArrayOfReadPointers(), buffer.getArrayOfWritePointers(), buffer.getNumSamples());
-
+	if (!buttonState) {
+		pCVibrato->process((float**)buffer.getArrayOfReadPointers(), buffer.getArrayOfWritePointers(), buffer.getNumSamples());
+	}
+	else {
+		//noProcessing
+	}
 	// This is the place where you'd normally do the guts of your plugin's
 	// audio processing...
 	// Make sure to reset the state if your inner loop is processing
 	// the samples and the outer loop is handling the channels.
 	// Alternatively, you can process the samples with the channels
 	// interleaved by keeping the same state.
-	//    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-	//    {
-	//
-	//        //pCVibrato->process( (float**)buffer.getArrayOfReadPointers(), buffer.getArrayOfWritePointers(), this->getSampleRate());
-	//        // ..do something to the data...
-	//        buffer.getWritePointer (channel);
-	//    }
+	
 }
 
 void VibratoPluginAudioProcessor::processBlockBypassed(AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
@@ -228,6 +226,7 @@ void VibratoPluginAudioProcessor::setParameter(int iParamIdx, float fNewValue)
 	else
 	{
 		std::cout << "invalid index!" << std::endl;
+		
 	}
 
 }

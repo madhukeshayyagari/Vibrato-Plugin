@@ -63,6 +63,7 @@ public:
 	float fModFreq;
 	float fModWidth;
 	CVibrato *pCVibrato;
+	bool buttonState = false;
 
 private:
 	//==============================================================================

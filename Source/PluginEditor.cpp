@@ -16,9 +16,9 @@ VibratoPluginAudioProcessorEditor::VibratoPluginAudioProcessorEditor(VibratoPlug
 	// Make sure that before the constructor has finished, you've set the
 	// editor's size to whatever you need it to be.
 	setSize(300, 300);
-	initializeSlider(m_sliderModFreq, 0.0f, 127.0f, 1.0f, 40, 30, 20, 165, "ModFreq", 50.0f);
+	initializeSlider(m_sliderModFreq, 0.0f, 20.0f, 1.0f, 40, 30, 20, 165, "ModFreq", 5.0f);
 	initializeSlider(m_sliderModWidth, 0.0f, 1.0f, 0.01f, 100, 30, 20, 165, "ModWidth", 0.5f);
-	initializeButton(m_toggleButton, 150, 30, 80, 40);
+	initializeButton(m_toggleButton, 210, 5, 80, 40);
 }
 
 VibratoPluginAudioProcessorEditor::~VibratoPluginAudioProcessorEditor()
@@ -46,21 +46,22 @@ void VibratoPluginAudioProcessorEditor::resized()
 
 void VibratoPluginAudioProcessorEditor::buttonClicked(Button* button)
 {
+	processor.buttonState = button->getToggleState();
 }
 
 void VibratoPluginAudioProcessorEditor::sliderValueChanged(Slider * slider)
 {
 	if (slider == &m_sliderModFreq)
 	{
-		std::cout << m_sliderModFreq.getValue() << std::endl;
-		processor.fModFreq = m_sliderModFreq.getValue();
+		
+		//processor.fModFreq = m_sliderModFreq.getValue();
 		processor.setParameter(0, m_sliderModFreq.getValue());
 		
 
 	}
 	else if (slider == &m_sliderModWidth)
 	{
-		processor.fModWidth = m_sliderModWidth.getValue();
+		//processor.fModWidth = m_sliderModWidth.getValue();
 		processor.setParameter(1, m_sliderModWidth.getValue());
 		
 	}
