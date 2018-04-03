@@ -71,7 +71,7 @@ private:
 
 
 
-		const float fMaxModWidth = 0.1;
-	bool bByPass;
+	const float fMaxModWidth = 1.0f;
+	//bool bByPass;
 
 };

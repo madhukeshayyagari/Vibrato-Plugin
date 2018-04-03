@@ -22,6 +22,7 @@ VibratoPluginAudioProcessor::VibratoPluginAudioProcessor()
 	)
 #endif
 {
+	pCVibrato = 0;
 }
 
 VibratoPluginAudioProcessor::~VibratoPluginAudioProcessor()
