@@ -60,22 +60,13 @@ public:
 	void setParameter(int iParamIdx, float fNewValue) override;
 	float getParameter(int iParamIdx) override;
 
-<<<<<<< HEAD
 
 	bool buttonState = false;
 
-=======
-	float fModFreq;
-	float fModWidth;
-	CVibrato *pCVibrato;
-	bool buttonState = false;
-
->>>>>>> origin/master
 private:
 	//==============================================================================
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(VibratoPluginAudioProcessor)
 
-<<<<<<< HEAD
     float fModFreq;
     float fModWidth;
     const float fModFreqInit = 10;
@@ -85,11 +76,3 @@ private:
 	//bool bByPass;
 
 };
-=======
-
-
-	const float fMaxModWidth = 1.0f;
-	//bool bByPass;
-
-};
->>>>>>> origin/master
