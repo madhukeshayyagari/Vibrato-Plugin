@@ -16,8 +16,13 @@ VibratoPluginAudioProcessorEditor::VibratoPluginAudioProcessorEditor(VibratoPlug
 	// Make sure that before the constructor has finished, you've set the
 	// editor's size to whatever you need it to be.
 	setSize(300, 300);
+<<<<<<< HEAD
 	initializeSlider(m_sliderModFreq, 0.0f, 20.0f, 1.0f, 40, 30, 50, 265, "Hz", 5.0f);
 	initializeSlider(m_sliderModWidth, 0.0f, 0.05f, 0.0005f, 100, 30, 50, 265, "s", 0.0125f);
+=======
+	initializeSlider(m_sliderModFreq, 0.0f, 20.0f, 1.0f, 40, 30, 20, 165, "ModFreq", 5.0f);
+	initializeSlider(m_sliderModWidth, 0.0f, 1.0f, 0.01f, 100, 30, 20, 165, "ModWidth", 0.5f);
+>>>>>>> origin/master
 	initializeButton(m_toggleButton, 210, 5, 80, 40);
 }
 
@@ -53,7 +58,11 @@ void VibratoPluginAudioProcessorEditor::sliderValueChanged(Slider * slider)
 {
 	if (slider == &m_sliderModFreq)
 	{
+<<<<<<< HEAD
         
+=======
+		
+>>>>>>> origin/master
 		//processor.fModFreq = m_sliderModFreq.getValue();
 		processor.setParameter(0, m_sliderModFreq.getValue());
 		
@@ -74,7 +83,11 @@ void VibratoPluginAudioProcessorEditor::initializeSlider(Slider & slider, float 
 	slider.setTextValueSuffix(displayText);
 	slider.setValue(fdefault);
 	slider.setBounds(x, y, width, height);
+<<<<<<< HEAD
 	slider.setTextBoxStyle(Slider::TextBoxBelow, false, 160, 30);
+=======
+	slider.setTextBoxStyle(Slider::NoTextBox, false, 90, 0);
+>>>>>>> origin/master
 	slider.addListener(this);
 	addAndMakeVisible(&slider);
 }
