@@ -53,17 +53,11 @@ void VibratoPluginAudioProcessorEditor::sliderValueChanged(Slider * slider)
 {
 	if (slider == &m_sliderModFreq)
 	{
-        
-		//processor.fModFreq = m_sliderModFreq.getValue();
 		processor.setParameter(0, m_sliderModFreq.getValue());
-		
-
 	}
 	else if (slider == &m_sliderModWidth)
 	{
-		//processor.fModWidth = m_sliderModWidth.getValue();
 		processor.setParameter(1, m_sliderModWidth.getValue());
-		
 	}
 }
 
